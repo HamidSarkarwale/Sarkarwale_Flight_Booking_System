@@ -26,9 +26,7 @@ namespace FlightBookingSystem.Models
         }
 
        
-        // public Flight_Details GetFlight_Details(string FlightFrom, string FlightTo, DateOnly DepartureDate)
-        //{
-        //return(Flight_Details);
+        
 
     }
 }
