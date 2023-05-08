@@ -1,10 +1,11 @@
 ﻿using FlightBookingSystem.Models;
 
-namespace FlightBookingSystem.Repository
+namespace FlightBookingSystem_Capgemini.Repository
 {
-    public interface IFlight_DetailsRepository
+    public interface IFlightDetailsRepository
     {
-        //public Flight_Details GetFlight_Details(string FlightFrom, string FlightTo, DateOnly DepartureDate);
-        public void SaveFlights(Flight_Details flight);
+        Task<List<Flight_Details>> GetFlight_Details();
+        Task<Flight_Details> CheckAvailibility(string FlightFrom, string FlightTo, DateTime Departure);
+
     }
 }

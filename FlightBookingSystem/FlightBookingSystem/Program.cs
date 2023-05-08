@@ -1,4 +1,6 @@
 using demo1.Models;
+using FlightBookingSystem.Models;
+using FlightBookingSystem_Capgemini.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ModelContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ModelCS")));
+
+builder.Services.AddScoped<IFlightDetailsRepository, FlightDetailsRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

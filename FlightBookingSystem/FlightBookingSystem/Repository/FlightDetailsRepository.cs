@@ -1,15 +1,34 @@
-﻿using FlightBookingSystem.Repository;
+﻿using demo1.Models;
+using FlightBookingSystem.Repository;
+using FlightBookingSystem_Capgemini.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlightBookingSystem.Models
 {
-    public class Flight_DetailsRepository : IFlight_DetailsRepository
+
+    public class FlightDetailsRepository : IFlightDetailsRepository
     {
-       // public Flight_Details GetFlight_Details(string FlightFrom, string FlightTo, DateOnly DepartureDate)
-        //{
-            //return(Flight_Details);
-        //}
-        public void SaveFlights(Flight_Details flight)
+        private readonly ModelContext dbcontext;
+
+        public FlightDetailsRepository(ModelContext dbcontext) 
         {
+            this.dbcontext = dbcontext;
         }
+        public async Task<Flight_Details> CheckAvailibility(string FlightFrom, string FlightTo, DateTime Departure)
+        {
+            var flight = await dbcontext.Flights.FirstOrDefaultAsync(x => (x.FlightFrom == FlightFrom) && (x.FlightTo == FlightTo) && (x.DepartureDate == Departure));
+            return (flight);
+        }
+
+        public async Task<List<Flight_Details>> GetFlight_Details()
+        {
+            return await dbcontext.Flights.ToListAsync();
+        }
+
+       
+        // public Flight_Details GetFlight_Details(string FlightFrom, string FlightTo, DateOnly DepartureDate)
+        //{
+        //return(Flight_Details);
+
     }
 }
